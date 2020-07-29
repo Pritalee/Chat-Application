@@ -55,50 +55,12 @@ io.on('connection',(socket)=>{
         console.log(data.receiver,' joined');
         socket.in(data.receiver)
         .emit('new group-msg',{sender: data.sender,receiver: data.receiver, message: data.message});
-        console.log('group-msg send');
-    
+        console.log('group-msg send');    
     })
-
-
-
 
 })
 
 
-
-
-
-/*
-app.get('/',(req,res)=>{
-    const user=new userSchema();
-    user.email='prit@gmail.com';
-    user.contact='9876543210';
-    user.password='qwerty';
-    user.userName='prit';
-    user.profilePicture='pritalee.jpg';
-    user.friends=['Neha','Prachi','Shreeya','Ajay','Harshita'];
-    user.groups=['foodBlog','soberlog'];
-    user.messages=[
-        {
-        name:'Neha',
-        chats:[
-           { msg:'Hello from Neha', timestamp:'11.53', media:['notes.pdf','flower.jpg'] } 
-        ]},
-        {
-        name:'Prachi',
-        chats:[
-           { msg:'Hello from Prachi', timestamp:'11.53', media:['notes.pdf','flower.jpg'] } 
-        ]},
-        
-    ];
-    user.save((err)=>{
-        if (err) console.log(err);
-        else console.log('saved to database');
-    })
-
-    res.send('inside node');
-});
-*/
 
 const port=process.env.PORT || 5000;
 

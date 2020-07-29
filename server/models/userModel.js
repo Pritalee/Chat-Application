@@ -26,14 +26,17 @@ var userSchema=mongoose.Schema({
     groups:{
         type:Array,
         default:[]
-    },
-    messages:{
-        type:Array,
-        default:[]
     }
 },
 {
     timestamps:true
 });
+
+
+userSchema.index({ userName:'text', email:'text' },
+            { weights:{
+                userName:5,
+                email:1
+            } })
 
 module.exports=mongoose.model('Users',userSchema);

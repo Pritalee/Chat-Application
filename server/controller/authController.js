@@ -14,6 +14,12 @@ exports.signupController= async (req,res)=>{
                 errorMessage:"Email already exists",
             });
         }
+        const handle= await User.findOne({userName:username});
+        if(handle){
+            return res.status(400).json({
+                errorMessage:"Username already exists",
+            });
+        }    
         const newUser=new User();
         newUser.email=email;
         newUser.contact=contact;
