@@ -12,10 +12,10 @@ router.post('/signup',signupValidator,resultValidator,signupController);
 router.post('/login',signupValidator,resultValidator,loginController);
 
 router.post('/details',(req,res)=>{
-    console.log(req.body);
+    //console.log(req.body);
     User.findOne({userName:req.body.username},(err,user)=>{
         if(err) console.log(err)
-        res.json({user});
+        res.json({friends:user.friends});
     })
 })
 
@@ -32,20 +32,20 @@ router.post('/chats',(req,res)=>{
             {$and:[{sender:receiver},{receiver:sender}]} ]},
         (err,messages)=>{
             if (err) console.log('server messages-',err);
-            console.log('1-1 msg');
+            //console.log('1-1 msg');
             res.json({messages})
         })
     }    
 })
 
 router.post('/searchFriends',(req,res)=>{
-    console.log('add friends server',req.body);
+    //console.log('add friends server',req.body);
     const searchTerm=req.body.queryField;
     
     User.find({"$text":{ "$search":searchTerm }})
     .exec((err,friends)=>{
         if(err) console.log(err)
-        console.log('add friends',friends);
+        //console.log('add friends',friends);
         res.json({friends})
     })    
 })
@@ -66,7 +66,7 @@ router.post('/addFriends',(req,res)=>{
 
 router.post('/newGroup',(req,res)=>{
     const members=req.body.groupMembers;
-    console.log(members,req.body);
+    //console.log(members,req.body);
     members.forEach(element => {
     User.findOneAndUpdate({userName:element}, {$push: {groups: req.body.groupName}},(err,user)=>{
         if(err) {
